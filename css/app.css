@@ -35,7 +35,7 @@ body {
 h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
-    margin:  18px auto 10px;
+    margin: 18px auto 10px;
     text-align: center;
 }
 
@@ -69,4 +69,54 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+/*
+* Styles for Deck of Cards
+*/
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 660px;
+    min-height: 680px;
+    padding: 36px;
+    background-color: darkslategray;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 36px;
+}
+
+.deck .card {
+    /* min-height: 52px; */
+    /* min-width: 52px; */
+    height: 125px;
+    width: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+    color: whitesmoke;
+    background-color: lightseagreen;
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    cursor: pointer;
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background-color: mediumseagreen;
+    cursor: default;
+}
+
+.deck .card.match {
+    cursor: default;
+    background-color: seagreen;
+    font-size: 42px;
+}
+
+.deck .card.show {
+    font-size: 48px;
 }
