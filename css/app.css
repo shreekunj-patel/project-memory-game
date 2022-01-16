@@ -28,7 +28,18 @@ body {
     flex-direction: column;
 }
 
+/*
+* Styles for Header
+*/
+
 h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
+    margin:  18px auto 10px;
+    text-align: center;
+}
+
+.tagline {
+    margin: 10px auto;
+    text-align: center;
 }
