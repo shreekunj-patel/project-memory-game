@@ -40,6 +40,33 @@ h1 {
 }
 
 .tagline {
-    margin: 10px auto;
+    margin: 10px auto 18px;
     text-align: center;
+}
+
+/*
+* Styles for Score Panel
+*/
+
+.score-panel {
+    margin-bottom: 10px;
+    text-align: left;
+    min-width: 360px;
+    max-width: 90%;
+}
+
+.score-panel .stars {
+    margin: 0 18px 0 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
 }
