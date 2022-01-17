@@ -1,5 +1,15 @@
 /** Constants */
 const DECK_OF_CARDS = document.querySelector('.deck');
+const CARD_SYMBOLS = [
+    'fa-gem',
+    'fa-paper-plane',
+    'fa-anchor',
+    'fa-bolt',
+    'fa-cube',
+    'fa-leaf',
+    'fa-bicycle',
+    'fa-bomb',
+];
 
 /** variables */
 
