@@ -199,13 +199,14 @@ function main(evt) {
 
 
 function calculateStarRating() {
-    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && starRating > 0) {
+    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && starRating > 1) {
         starRating -= 1;
         const docFragment = document.createDocumentFragment();
+        let li;
         for (let j=0; j<TOTAL_STAR_RATING; j++) {
-            let li = document.createElement('li');
+            li = document.createElement('li');
             let i = document.createElement('i');
-            if (j <= starRating) {
+            if (j < starRating) {
                 i.className = 'fas fa-star fa-xs'; // here's 'fas' for 'font awesome solid' star
             } else {
                 i.className = 'far fa-star fa-xs'; // here's 'far' for 'font awesome regular' star
@@ -214,6 +215,7 @@ function calculateStarRating() {
         }
         docFragment.append(li);
 
+        STARS.append(docFragment);
     }
 
 }
