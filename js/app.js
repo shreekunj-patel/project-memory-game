@@ -18,7 +18,7 @@ const CARD_SYMBOLS = [
 // ------------ Variables -----------
 let totalMoves = 0;
 let extraMoves = 0; // wasted moves for calculating star rating
-let currentStarRating = 5;
+let currentStarRating = MAX_STAR_RATING;
 /** Total number of cards to match for successfully matching, must be minimum 2.
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
@@ -202,7 +202,8 @@ function main(evt) {
 
 function createStarRating() {
     if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && currentStarRating > 1) {
-        currentStarRating -= 1;
+        /** for resetting  purpose */
+        currentStarRating = (totalMoves === 0) ? MAX_STAR_RATING : --currentStarRating;
         const docFragment = document.createDocumentFragment();
         let li = '';
         let i = '';
