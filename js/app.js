@@ -130,3 +130,16 @@ function createCardArray() {
     console.log(cards);
     return cards;
 }
+
+
+/**
+ * main function.
+ * @param {Event} evt for getting node name.
+ */
+function main(evt) {
+    /** Opens and shows card which is clicked */
+    if (evt.target.nodeName.toLowerCase() === 'li') {
+        evt.target.classList.add('open');
+        evt.target.classList.add('show');
+    }
+}
