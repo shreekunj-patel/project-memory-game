@@ -1,4 +1,5 @@
 // ------------ Constants ------------
+const RESET = document.querySelector('.restart');
 const DECK_OF_CARDS = document.querySelector('.deck');
 const CARD_SYMBOLS = [
     'fa-gem',
@@ -30,6 +31,11 @@ let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
 let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
+
+
+// ------------- Listeners --------------
+RESET.addEventListener('click', createDeck);
+
 
 
 // ------------- Functions -------------
