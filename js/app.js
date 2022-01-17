@@ -56,3 +56,26 @@ function createDeck(){
     // t1 = performance.now(); // to test performance
     // console.log(t1-t0 + 'ms'); // to test performance
 }
+
+
+/**
+ * Shuffles given array.
+ *
+ * from http://stackoverflow.com/a/2450976
+ * @param {array} arr
+ */
+function shuffle(arr) {
+    let currentIndex = arr.length;
+    let tempValue;
+    let randomIndex;
+
+    while(currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random * currentIndex); //generates random integer from 0 to currentIndex
+        currentIndex -=1;
+        tempValue = arr[currentIndex]; // save currentIndex value as temp value
+        arr[currentIndex] = arr[randomIndex]; // sets generated random index's value as current index's
+        arr[randomIndex] = tempValue; // sets saved temp value(which was current index's value) to random index
+    }
+
+    return arr;
+}
