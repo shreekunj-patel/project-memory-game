@@ -180,7 +180,7 @@ function main(evt) {
                     } else {
                         extraMoves += totalCardsToMatchForSinglePair;
                         // Calculate Star rating
-                        calculateStarRating();
+                        createStarRating();
                         console.log('closing cards cause it\'s not same');
                         liList.forEach((li) => {
                             li.className = 'card'; // removes 'open' and 'show' class
@@ -200,8 +200,8 @@ function main(evt) {
 }
 
 
-function calculateStarRating() {
-    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && currentStarRating > 1 && extraMoves > 0) {
+function createStarRating() {
+    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && currentStarRating > 1) {
         currentStarRating -= 1;
         const docFragment = document.createDocumentFragment();
         let li = '';
