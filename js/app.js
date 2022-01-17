@@ -1,4 +1,4 @@
-/** Constants */
+// ------------ Constants ------------
 const DECK_OF_CARDS = document.querySelector('.deck');
 const CARD_SYMBOLS = [
     'fa-gem',
@@ -11,10 +11,16 @@ const CARD_SYMBOLS = [
     'fa-bomb',
 ];
 
-/** variables */
+// ------------ Variables -----------
+/** Total number of cards to match for successfully matching, must be minimum 2.
+ * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
+ * correctly matching
+*/
+let totalCardsToMatchForSinglePair = 2; // min:2 max:5
 
 
 
+// ------------- Functions -------------
 /**
  * Creates Deck of cards (or rather symbols)
  */
