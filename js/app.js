@@ -32,23 +32,26 @@ let totalCards = 16; // min: 4, max: 60
 checkForTotalCards();
 
 
-
 // ------------- Functions -------------
 /**
  * Creates Deck of cards (or rather symbols)
  */
-function createDeck(){
+function createDeck(evt){
     // t0 = performance.now(); // to test performance
     const docFragment = document.createDocumentFragment(); // document fragment for performance purpose
+    let cards = createCardArray();
+    cards = shuffle(cards);
     let li = '';
     let i = '';
     // TODO: Change hardcoded value 16 to any number in bellow for loop,
     // which is >= 4 dynamically for level system or from user input.
-    for (let x=0; x < 16; x++) {
+    for (let index=0; index < 16; index++) {
         li = document.createElement('li');
         li.classList.add('card');
         i = document.createElement('i');
         i.classList.add('fas'); // Add class for font awesome library 'fas' for solid & 'far' for regular icons
+        console.log(cards[index]);
+        i.classList.add(cards[index]);
         li.append(i);
         docFragment.append(li);
         //docFragment.lastElementChild.append(i);
