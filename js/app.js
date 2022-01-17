@@ -30,7 +30,7 @@ let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
 let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
-let cards = createCardArray();
+
 
 
 // ------------- Functions -------------
@@ -67,18 +67,19 @@ function createDeck(){
  * @param {array} arr
  */
 function shuffle(arr) {
+    console.log('Before shuffle:\n' + arr);
     let currentIndex = arr.length;
     let tempValue;
     let randomIndex;
 
     while(currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random * currentIndex); //generates random integer from 0 to currentIndex
+        randomIndex = Math.floor(Math.random() * currentIndex); //generates random integer from 0 to currentIndex
         currentIndex -=1;
         tempValue = arr[currentIndex]; // save currentIndex value as temp value
         arr[currentIndex] = arr[randomIndex]; // sets generated random index's value as current index's
         arr[randomIndex] = tempValue; // sets saved temp value(which was current index's value) to random index
     }
-
+    console.log('After shuffle:\n' + arr);
     return arr;
 }
 
