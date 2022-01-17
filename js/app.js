@@ -144,11 +144,13 @@ function createCardArray() {
  */
 function main(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
-        // Add a move.
-        totalMoves += 1;
-        MOVES.textContent = totalMoves;
-        // Opens and shows card which is clicked
-        evt.target.classList.add('open');
-        evt.target.classList.add('show');
+        if (!(evt.target.classList.contains('open') || evt.target.classList.contains('match'))) {
+            // Add a move.
+            totalMoves += 1;
+            MOVES.textContent = totalMoves;
+            // Opens and shows card which is clicked
+            evt.target.classList.add('open');
+            evt.target.classList.add('show');
+        }
     }
 }
