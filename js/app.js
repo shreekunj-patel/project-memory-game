@@ -44,9 +44,12 @@ DECK_OF_CARDS.addEventListener('click', main);
 // ------------- Functions -------------
 /**
  * Creates Deck of cards (or rather symbols)
+ * @param {Event} evt
  */
 function createDeck(evt){
     // t0 = performance.now(); // to test performance
+    totalMoves = 0; // reset total moves
+    MOVES.textContent = totalMoves;
     const docFragment = document.createDocumentFragment(); // document fragment for performance purpose
     let cards = createCardArray();
     cards = shuffle(cards);
