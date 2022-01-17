@@ -2,6 +2,8 @@
 const RESET = document.querySelector('.restart');
 const DECK_OF_CARDS = document.querySelector('.deck');
 const MOVES = document.querySelector('.moves');
+const STARS = document.querySelector('.stars');
+const TOTAL_STAR_RATING = 5;
 const CARD_SYMBOLS = [
     'fa-gem',
     'fa-paper-plane',
@@ -15,6 +17,8 @@ const CARD_SYMBOLS = [
 
 // ------------ Variables -----------
 let totalMoves = 0;
+let extraMoves = 0; // wasted moves for calculating star rating
+let starRating = 5;
 /** Total number of cards to match for successfully matching, must be minimum 2.
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
@@ -34,6 +38,7 @@ let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
 
+const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 1.5); // change multiplication value
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', createDeck);
@@ -149,6 +154,7 @@ function main(evt) {
             // Add a move.
             totalMoves += 1;
             MOVES.textContent = totalMoves;
+            extraMoves += 1;
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
@@ -156,7 +162,7 @@ function main(evt) {
             // DECK_OF_CARDS.removeEventListener('click', main);
             let remainder = totalMoves % totalCardsToMatchForSinglePair;
             if (remainder === 0) {
-                console.log('opened 2 cards');
+                console.log('opened ' + totalCardsToMatchForSinglePair + ' cards');
                 setTimeout(() => {
                     DECK_OF_CARDS.removeEventListener('click', main);
                     console.log('Event listener removed');
@@ -189,4 +195,25 @@ function main(evt) {
             // DECK_OF_CARDS.addEventListener('click', main);
         }
     }
+}
+
+
+function calculateStarRating() {
+    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && starRating > 0) {
+        starRating -= 1;
+        const docFragment = document.createDocumentFragment();
+        for (let j=0; j<TOTAL_STAR_RATING; j++) {
+            let li = document.createElement('li');
+            let i = document.createElement('i');
+            if (j <= starRating) {
+                i.className = 'fas fa-star fa-xs'; // here's 'fas' for 'font awesome solid' star
+            } else {
+                i.className = 'far fa-star fa-xs'; // here's 'far' for 'font awesome regular' star
+            }
+            li.append(i);
+        }
+        docFragment.append(li);
+
+    }
+
 }
