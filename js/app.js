@@ -35,6 +35,7 @@ checkForTotalCards();
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', createDeck);
+DECK_OF_CARDS.addEventListener('click', main);
 
 
 
