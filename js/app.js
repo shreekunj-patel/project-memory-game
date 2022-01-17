@@ -16,7 +16,18 @@ const CARD_SYMBOLS = [
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
 */
-let totalCardsToMatchForSinglePair = 2; // min:2 max:5
+let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
+/** total number of cards to play (maximum 60), must be multiplication of
+ * totalCardsToMatchForSinglePair and n, where n must be minimum 2.
+ *
+ * eg, if totalCardsToMatchForSinglePair = 4
+ * then totalCards must be one number from the following list
+ *
+ * [4x2, 4x3, 4x4,..., 4x12, 4x13, 4x14]
+ * which is
+ * [8, 12, 16,...,48, 52, 58]
+ * */
+let totalCards = 16; // min: 4, max: 60
 
 
 
