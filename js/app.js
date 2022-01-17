@@ -41,7 +41,7 @@ checkForTotalCards();
 const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 2); // change multiplication value
 
 // ------------- Listeners --------------
-RESET.addEventListener('click', createDeck);
+RESET.addEventListener('click', resetGame);
 DECK_OF_CARDS.addEventListener('click', main);
 
 
@@ -49,12 +49,9 @@ DECK_OF_CARDS.addEventListener('click', main);
 // ------------- Functions -------------
 /**
  * Creates Deck of cards (or rather symbols)
- * @param {Event} evt
  */
-function createDeck(evt){
+function createDeck(){
     // t0 = performance.now(); // to test performance
-    totalMoves = 0; // reset total moves
-    MOVES.textContent = totalMoves;
     const docFragment = document.createDocumentFragment(); // document fragment for performance purpose
     let cards = createCardArray();
     cards = shuffle(cards);
@@ -228,4 +225,14 @@ function createStarRating() {
         STARS.append(docFragment); // Adds Star rating to the score panel
     }
 
+}
+
+
+function resetGame(evt) {
+    totalMoves = 0; // reset total moves
+    MOVES.textContent = totalMoves; // reset Moves display
+    extraMoves = 0; // reset extra moves
+    currentStarRating = MAX_STAR_RATING; // reset star rating
+    createStarRating(); // reset star rating display
+    createDeck();
 }
