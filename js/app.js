@@ -144,6 +144,7 @@ function createCardArray() {
  */
 function main(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
+        // only run code if card is neither open nor match
         if (!(evt.target.classList.contains('open') || evt.target.classList.contains('match'))) {
             // Add a move.
             totalMoves += 1;
@@ -151,6 +152,41 @@ function main(evt) {
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
+            //before checking for matching cards remove event listener and then add it back.
+            // DECK_OF_CARDS.removeEventListener('click', main);
+            let remainder = totalMoves % totalCardsToMatchForSinglePair;
+            if (remainder === 0) {
+                console.log('opened 2 cards');
+                setTimeout(() => {
+                    DECK_OF_CARDS.removeEventListener('click', main);
+                    console.log('Event listener removed');
+                }, 0);
+                setTimeout(() => {
+                    // list of all li which contains 'open' and 'show' class
+                    let liList = DECK_OF_CARDS.querySelectorAll('.open.show');
+                    if (liList[0].firstElementChild.className === liList[1].firstElementChild.className) {
+                        console.log('Congrats you found a pair');
+                        liList.forEach((li) => {
+                            li.className = 'card match'; // removes 'open' and 'show' class and adds 'match' class
+                            // li.classList.add('match');
+                            // li.classList.remove('open');
+                            // li.classList.remove('show');
+                        });
+                    } else {
+                        console.log('closing cards cause it\'s not same');
+                        liList.forEach((li) => {
+                            li.className = 'card'; // removes 'open' and 'show' class
+                            //li.classList.remove('open');
+                            //li.classList.remove('show');
+                        });
+                    }
+                }, 750);
+                setTimeout(() => {
+                    DECK_OF_CARDS.addEventListener('click', main);
+                    console.log('Event listener added');
+                }, 1000);
+            }
+            // DECK_OF_CARDS.addEventListener('click', main);
         }
     }
 }
