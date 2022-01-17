@@ -28,6 +28,8 @@ let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
  * [8, 12, 16,...,48, 52, 58]
  * */
 let totalCards = 16; // min: 4, max: 60
+// check if given total cards
+checkForTotalCards();
 
 
 
@@ -78,4 +80,27 @@ function shuffle(arr) {
     }
 
     return arr;
+}
+
+
+/**
+ *  Checks  if totalCards variable has valid value or not
+ */
+function checkForTotalCards () {
+    console.log('total cards: ' + totalCards);
+    if (totalCards < totalCardsToMatchForSinglePair * 2) {
+        console.log('setting minimum value for totalCards, value not set according to rule.');
+        totalCards = totalCardsToMatchForSinglePair * 2;
+        console.log('new total cards: ' + totalCards);
+    } else {
+        let remainder = totalCards % totalCardsToMatchForSinglePair;
+        if (remainder !== 0) {
+            console.log('changing value of totalCards, value not set according to rule.');
+            while (remainder !== 0) {
+                totalCards--;
+                remainder = totalCards % totalCardsToMatchForSinglePair;
+            }
+            console.log('new total cards: ' + totalCards);
+        }
+    }
 }
