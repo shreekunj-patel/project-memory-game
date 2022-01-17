@@ -3,7 +3,7 @@ const RESET = document.querySelector('.restart');
 const DECK_OF_CARDS = document.querySelector('.deck');
 const MOVES = document.querySelector('.moves');
 const STARS = document.querySelector('.stars');
-const TOTAL_STAR_RATING = 5;
+const MAX_STAR_RATING = 5;
 const CARD_SYMBOLS = [
     'fa-gem',
     'fa-paper-plane',
@@ -18,7 +18,7 @@ const CARD_SYMBOLS = [
 // ------------ Variables -----------
 let totalMoves = 0;
 let extraMoves = 0; // wasted moves for calculating star rating
-let starRating = 5;
+let currentStarRating = 5;
 /** Total number of cards to match for successfully matching, must be minimum 2.
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
@@ -38,7 +38,7 @@ let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
 
-const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 1.5); // change multiplication value
+const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 2); // change multiplication value
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', createDeck);
@@ -154,7 +154,6 @@ function main(evt) {
             // Add a move.
             totalMoves += 1;
             MOVES.textContent = totalMoves;
-            extraMoves += 1;
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
@@ -173,13 +172,15 @@ function main(evt) {
                     if (liList[0].firstElementChild.className === liList[1].firstElementChild.className) {
                         console.log('Congrats you found a pair');
                         liList.forEach((li) => {
-                            extraMoves -= totalCardsToMatchForSinglePair;
                             li.className = 'card match'; // removes 'open' and 'show' class and adds 'match' class
                             // li.classList.add('match');
                             // li.classList.remove('open');
                             // li.classList.remove('show');
                         });
                     } else {
+                        extraMoves += totalCardsToMatchForSinglePair;
+                        // Calculate Star rating
+                        calculateStarRating();
                         console.log('closing cards cause it\'s not same');
                         liList.forEach((li) => {
                             li.className = 'card'; // removes 'open' and 'show' class
@@ -194,31 +195,36 @@ function main(evt) {
                     console.log('Event listener added');
                 }, 1000);
             }
-            // Star rating
-            calculateStarRating();
         }
     }
 }
 
 
 function calculateStarRating() {
-    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && starRating > 1) {
-        starRating -= 1;
+    if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && currentStarRating > 1 && extraMoves > 0) {
+        currentStarRating -= 1;
         const docFragment = document.createDocumentFragment();
-        let li;
-        for (let j=0; j<TOTAL_STAR_RATING; j++) {
+        let li = '';
+        let i = '';
+        for (let index = 0; index < MAX_STAR_RATING; index++) {
             li = document.createElement('li');
-            let i = document.createElement('i');
-            if (j < starRating) {
-                i.className = 'fas fa-star fa-xs'; // here's 'fas' for 'font awesome solid' star
-            } else {
-                i.className = 'far fa-star fa-xs'; // here's 'far' for 'font awesome regular' star
-            }
+            i = document.createElement('i');
+            /**
+             *  Add class for font awesome library
+             * 'fas' for font awesome solid icons
+             * 'far' for font awesome regular icons
+             *
+             */
+            let fasOrFar = (index < currentStarRating) ? 'fas' : 'far';
+            i.classList.add(fasOrFar);
+            i.classList.add('fa-star');
+            i.classList.add('fa-xs');
             li.append(i);
+            docFragment.append(li);
+            //docFragment.lastElementChild.append(i);
         }
-        docFragment.append(li);
-
-        STARS.append(docFragment);
+        STARS.innerHTML = ''; // Clears existing Star Rating before adding it again.
+        STARS.append(docFragment); // Adds Star rating to the score panel
     }
 
 }
