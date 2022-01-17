@@ -1,6 +1,7 @@
 // ------------ Constants ------------
 const RESET = document.querySelector('.restart');
 const DECK_OF_CARDS = document.querySelector('.deck');
+const MOVES = document.querySelector('.moves');
 const CARD_SYMBOLS = [
     'fa-gem',
     'fa-paper-plane',
@@ -13,6 +14,7 @@ const CARD_SYMBOLS = [
 ];
 
 // ------------ Variables -----------
+let totalMoves = 0;
 /** Total number of cards to match for successfully matching, must be minimum 2.
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
@@ -138,8 +140,11 @@ function createCardArray() {
  * @param {Event} evt for getting node name.
  */
 function main(evt) {
-    /** Opens and shows card which is clicked */
     if (evt.target.nodeName.toLowerCase() === 'li') {
+        // Add a move.
+        totalMoves += 1;
+        MOVES.textContent = totalMoves;
+        // Opens and shows card which is clicked
         evt.target.classList.add('open');
         evt.target.classList.add('show');
     }
