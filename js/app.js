@@ -158,21 +158,22 @@ function main(evt) {
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
-            //before checking for matching cards remove event listener and then add it back.
-            // DECK_OF_CARDS.removeEventListener('click', main);
             let remainder = totalMoves % totalCardsToMatchForSinglePair;
             if (remainder === 0) {
                 console.log('opened ' + totalCardsToMatchForSinglePair + ' cards');
+                //before checking for matching cards remove event listener and then add it back.
                 setTimeout(() => {
                     DECK_OF_CARDS.removeEventListener('click', main);
                     console.log('Event listener removed');
                 }, 0);
+                // check for matching cards
                 setTimeout(() => {
                     // list of all li which contains 'open' and 'show' class
                     let liList = DECK_OF_CARDS.querySelectorAll('.open.show');
                     if (liList[0].firstElementChild.className === liList[1].firstElementChild.className) {
                         console.log('Congrats you found a pair');
                         liList.forEach((li) => {
+                            extraMoves -= totalCardsToMatchForSinglePair;
                             li.className = 'card match'; // removes 'open' and 'show' class and adds 'match' class
                             // li.classList.add('match');
                             // li.classList.remove('open');
@@ -187,12 +188,14 @@ function main(evt) {
                         });
                     }
                 }, 750);
+                // add back event listener.
                 setTimeout(() => {
                     DECK_OF_CARDS.addEventListener('click', main);
                     console.log('Event listener added');
                 }, 1000);
             }
-            // DECK_OF_CARDS.addEventListener('click', main);
+            // Star rating
+            calculateStarRating();
         }
     }
 }
