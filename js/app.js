@@ -30,7 +30,7 @@ let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
 let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
-
+let cards = createCardArray();
 
 
 // ------------- Functions -------------
@@ -103,4 +103,20 @@ function checkForTotalCards () {
             console.log('new total cards: ' + totalCards);
         }
     }
+}
+
+
+function createCardArray() {
+    let cards = [];
+    if (CARD_SYMBOLS.length != totalCards / totalCardsToMatchForSinglePair) {
+        console.log(CARD_SYMBOLS.length);
+        console.log(totalCards / totalCardsToMatchForSinglePair);
+    } else {
+        cards = CARD_SYMBOLS.concat(CARD_SYMBOLS);
+        for (let i=2; i<totalCardsToMatchForSinglePair; i++) {
+            cards = cards.concat(CARD_SYMBOLS);
+        }
+    }
+    console.log(cards);
+    return cards;
 }
