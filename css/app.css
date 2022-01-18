@@ -125,3 +125,63 @@ h1 {
 .deck .card.show {
     font-size: 48px;
 }
+
+/*
+* Styles for Congratulation Message
+*/
+
+.deck,
+.score-panel {
+    display: none;
+}
+
+.win-message {
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.win-greet {
+    font: 400  1.8em/1.15em 'Roboto', sans-serif;
+    text-align: center;
+    align-content: center;
+}
+
+.final-score {
+    font-size: 1.25em;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.final-score .fa-star {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.final-score .final-star,
+.final-score .final-moves {
+    font-size: 1.1em;
+    margin-left: 10px;
+}
+
+
+.play-again {
+    font-size: 1.1em;
+    margin: 18px auto;
+    text-align: center;
+    padding: 7.5px 0;
+    width: 120px;
+    border-radius: 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.play-again:hover,
+.play-again:focus {
+    border-radius: 10px;
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
