@@ -130,17 +130,15 @@ h1 {
 * Styles for Congratulation Message
 */
 
-.deck,
-.score-panel {
-    display: none;
-}
-
 .win-message {
     width: 400px;
     justify-content: center;
     align-items: center;
 }
 
+.win-message img {
+    width: 400px;
+}
 
 .win-greet {
     font: 400  1.8em/1.15em 'Roboto', sans-serif;
