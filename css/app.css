@@ -173,11 +173,15 @@ h1 {
     padding: 7.5px 0;
     width: 120px;
     border-radius: 8px;
-    background-color: steelblue ;
-    color: snow;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.play-again:hover {
-    background-color: lightskyblue;
-    color: midnightblue;
+.play-again:hover,
+.play-again:focus {
+    border-radius: 10px;
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
