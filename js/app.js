@@ -1,9 +1,17 @@
 // ------------ Constants ------------
-const RESET = document.querySelector('.restart');
-const DECK_OF_CARDS = document.querySelector('.deck');
-const MOVES = document.querySelector('.moves');
-const STARS = document.querySelector('.stars');
+// Score Panel
+const SCORE_PANEL = document.body.querySelector('.score-panel');
+const STARS = SCORE_PANEL.querySelector('.stars');
+const RESET = SCORE_PANEL.querySelector('.restart');
+const MOVES = SCORE_PANEL.querySelector('.moves');
 const MAX_STAR_RATING = 5;
+// Winning Message
+const WIN_MESSAGE = document.body.querySelector('.win-message');
+const WIN_STARS = WIN_MESSAGE.querySelector('.final-stars');
+const WIN_MOVES = WIN_MESSAGE.querySelector('.final-moves');
+const PLAY_AGAIN = WIN_MESSAGE.querySelector('.play-again');
+// Deck of Cards
+const DECK_OF_CARDS = document.body.querySelector('.deck');
 const CARD_SYMBOLS = [
     'fa-gem',
     'fa-paper-plane',
@@ -38,7 +46,9 @@ let totalCards = 16; // min: 4, max: 60
 // check if given total cards
 checkForTotalCards();
 
-const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 2); // change multiplication value
+// change multiplication value to adjust star rating.
+// higher the value easier it is to acquire 5 stars.
+const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 2);
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', resetGame);
@@ -124,6 +134,10 @@ function checkForTotalCards() {
 }
 
 
+/**
+ * Creates card array from symbols array.
+ * @returns {Array}
+ */
 function createCardArray() {
     let cards = [];
     if (CARD_SYMBOLS.length != totalCards / totalCardsToMatchForSinglePair) {
@@ -197,6 +211,9 @@ function main(evt) {
 }
 
 
+/**
+ *  Create Star Rating for score panel.
+ */
 function createStarRating() {
     if (extraMoves % MOVES_TO_DECREASE_STAR === 0 && currentStarRating > 1) {
         /** for resetting  purpose */
@@ -228,6 +245,9 @@ function createStarRating() {
 }
 
 
+/**
+ *  Restart | Reset | Play Again
+ */
 function resetGame(evt) {
     totalMoves = 0; // reset total moves
     MOVES.textContent = totalMoves; // reset Moves display
