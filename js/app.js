@@ -24,18 +24,21 @@ const CARD_SYMBOLS = [
 ];
 
 // ------------ Variables -----------
+let matchedCardsCount = 0;
 let totalMoves = 0;
 let extraMoves = 0; // wasted moves for calculating star rating
 let currentStarRating = MAX_STAR_RATING;
+
 /** Total number of cards to match for successfully matching, must be minimum 2.
  * eg. if it's set to 4 then Player must select 4 cards with exact same symbol for
  * correctly matching
 */
-let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
+let totalCardsForSinglePair = 2; // min: 2, max: 5
+
 /** total number of cards to play (maximum 60), must be multiplication of
- * totalCardsToMatchForSinglePair and n, where n must be minimum 2.
+ * totalCardsForSinglePair and n, where n must be minimum 2.
  *
- * eg, if totalCardsToMatchForSinglePair = 4
+ * eg, if totalCardsForSinglePair = 4
  * then totalCards must be one number from the following list
  *
  * [4x2, 4x3, 4x4,..., 4x12, 4x13, 4x14]
@@ -43,12 +46,12 @@ let totalCardsToMatchForSinglePair = 2; // min: 2, max: 5
  * [8, 12, 16,...,48, 52, 58]
  * */
 let totalCards = 16; // min: 4, max: 60
-// check if given total cards
+// check if given total cards are valid or not.
 checkForTotalCards();
 
 // change multiplication value to adjust star rating.
 // higher the value easier it is to acquire 5 stars.
-const MOVES_TO_DECREASE_STAR = Math.round(totalCardsToMatchForSinglePair * 2);
+const MOVES_TO_DECREASE_STAR = Math.round(totalCardsForSinglePair * 2);
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', resetGame);
@@ -116,17 +119,17 @@ function shuffle(arr) {
  */
 function checkForTotalCards() {
     console.log('total cards: ' + totalCards);
-    if (totalCards < totalCardsToMatchForSinglePair * 2) {
+    if (totalCards < totalCardsForSinglePair * 2) {
         console.log('setting minimum value for totalCards, value not set according to rule.');
-        totalCards = totalCardsToMatchForSinglePair * 2;
+        totalCards = totalCardsForSinglePair * 2;
         console.log('new total cards: ' + totalCards);
     } else {
-        let remainder = totalCards % totalCardsToMatchForSinglePair;
+        let remainder = totalCards % totalCardsForSinglePair;
         if (remainder !== 0) {
             console.log('changing value of totalCards, value not set according to rule.');
             while (remainder !== 0) {
                 totalCards--;
-                remainder = totalCards % totalCardsToMatchForSinglePair;
+                remainder = totalCards % totalCardsForSinglePair;
             }
             console.log('new total cards: ' + totalCards);
         }
@@ -140,12 +143,12 @@ function checkForTotalCards() {
  */
 function createCardArray() {
     let cards = [];
-    if (CARD_SYMBOLS.length != totalCards / totalCardsToMatchForSinglePair) {
+    if (CARD_SYMBOLS.length != totalCards / totalCardsForSinglePair) {
         console.log(CARD_SYMBOLS.length);
-        console.log(totalCards / totalCardsToMatchForSinglePair);
+        console.log(totalCards / totalCardsForSinglePair);
     } else {
         cards = CARD_SYMBOLS.concat(CARD_SYMBOLS);
-        for (let i = 2; i < totalCardsToMatchForSinglePair; i++) {
+        for (let i = 2; i < totalCardsForSinglePair; i++) {
             cards = cards.concat(CARD_SYMBOLS);
         }
     }
@@ -168,9 +171,9 @@ function main(evt) {
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
-            let remainder = totalMoves % totalCardsToMatchForSinglePair;
+            let remainder = totalMoves % totalCardsForSinglePair;
             if (remainder === 0) {
-                console.log('opened ' + totalCardsToMatchForSinglePair + ' cards');
+                console.log('opened ' + totalCardsForSinglePair + ' cards');
                 //before checking for matching cards remove event listener and then add it back.
                 setTimeout(() => {
                     DECK_OF_CARDS.removeEventListener('click', main);
@@ -180,8 +183,11 @@ function main(evt) {
                 setTimeout(() => {
                     // list of all li which contains 'open' and 'show' class
                     let liList = DECK_OF_CARDS.querySelectorAll('.open.show');
+                    // check if pair found or not.
                     if (liList[0].firstElementChild.className === liList[1].firstElementChild.className) {
                         console.log('Congrats you found a pair');
+                        // add all matched cards to matchedCardsCount
+                        matchedCardsCount += totalCardsForSinglePair;
                         liList.forEach((li) => {
                             li.className = 'card match'; // removes 'open' and 'show' class and adds 'match' class
                             // li.classList.add('match');
@@ -189,7 +195,7 @@ function main(evt) {
                             // li.classList.remove('show');
                         });
                     } else {
-                        extraMoves += totalCardsToMatchForSinglePair;
+                        extraMoves += totalCardsForSinglePair;
                         // Calculate Star rating
                         createStarRating();
                         console.log('closing cards cause it\'s not same');
