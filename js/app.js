@@ -264,6 +264,7 @@ function createStarRating() {
  *  Restart | Reset Game
  */
 function resetGame(evt) {
+    matchedCardsCount = 0;
     totalMoves = 0; // reset total moves
     MOVES.textContent = totalMoves; // reset Moves display
     extraMoves = 0; // reset extra moves
