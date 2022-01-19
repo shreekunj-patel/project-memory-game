@@ -297,7 +297,7 @@ function playAgain(evt) {
     setTimeout(() => {
         RESET.addEventListener('click', resetGame);
         DECK_OF_CARDS.addEventListener('click', main);
-    }, 1000);
+    }, 500);
 }
 
 
