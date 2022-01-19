@@ -7,7 +7,7 @@ const MOVES = SCORE_PANEL.querySelector('.moves');
 const MAX_STAR_RATING = 5;
 // Winning Message
 const WIN_MESSAGE = document.body.querySelector('.win-message');
-const WIN_STARS = WIN_MESSAGE.querySelector('.final-stars');
+const WIN_STARS = WIN_MESSAGE.querySelector('.final-star');
 const WIN_MOVES = WIN_MESSAGE.querySelector('.final-moves');
 const PLAY_AGAIN = WIN_MESSAGE.querySelector('.play-again');
 // Deck of Cards
@@ -255,4 +255,32 @@ function resetGame(evt) {
     currentStarRating = MAX_STAR_RATING; // reset star rating
     createStarRating(); // reset star rating display
     createDeck();
+}
+
+
+function displayWinGameMsg() {
+    // Remove event listeners for any Element which is not going to display in Win-Game-Message.
+    setTimeout(() => {
+        RESET.removeEventListener('click', resetGame);
+        DECK_OF_CARDS.removeEventListener('click', main);
+    }, 0);
+
+    const docFragment = document.createDocumentFragment();
+    // add total moves and current star rating in win message
+    WIN_STARS.innerHTML = currentStarRating;
+    WIN_MOVES.innerHTML = totalMoves;
+    // add tabIndex to Play again so it becomes keyboard focusable
+    PLAY_AGAIN.tabIndex = 0;
+
+    // hide game screen(deck) and score panel
+    SCORE_PANEL.style.display = 'none';
+    SCORE_PANEL.hidden = true;
+    DECK_OF_CARDS.style.display = 'none';
+    DECK_OF_CARDS.hidden = true;
+    // show winning message
+    WIN_MESSAGE.style.display = '';
+    WIN_MESSAGE.hidden = false;
+
+    // add event listener to Play again button
+    // PLAY_AGAIN.addEventListener('click', resetGame);
 }
