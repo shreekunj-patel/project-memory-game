@@ -194,6 +194,13 @@ function main(evt) {
                             // li.classList.remove('open');
                             // li.classList.remove('show');
                         });
+                        // if all cards matched display Winning Message
+                        if (gameWon()) {
+                            setTimeout(() => {
+                                displayWinGameMsg();
+                            }, 300);
+                        }
+
                     } else {
                         extraMoves += 1;
                         // Calculate Star rating
@@ -206,11 +213,13 @@ function main(evt) {
                         });
                     }
                 }, 750);
-                // add back event listener.
-                setTimeout(() => {
-                    DECK_OF_CARDS.addEventListener('click', main);
-                    console.log('Event listener added');
-                }, 1000);
+                // add back event listener, only if gameWon = false.
+                if (!(gameWon())) {
+                    setTimeout(() => {
+                        DECK_OF_CARDS.addEventListener('click', main);
+                        console.log('Event listener added');
+                    }, 1000);
+                }
             }
         }
     }
