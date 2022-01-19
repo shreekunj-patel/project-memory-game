@@ -273,6 +273,31 @@ function resetGame(evt) {
 }
 
 
+function playAgain(evt) {
+    // Remove event listener for play again button
+    setTimeout(() => {
+        PLAY_AGAIN.addEventListener('click', playAgain);
+    }, 0);
+
+    // reset game before displaying game content, so it doesn't cause reflow
+    resetGame(evt);
+
+    // hide content of win-message and show game deck and score panel
+    WIN_MESSAGE.style.display = 'none';
+    WIN_MESSAGE.hidden = true;
+    SCORE_PANEL.style.display = '';
+    SCORE_PANEL.hidden = false;
+    DECK_OF_CARDS.style.display = '';
+    DECK_OF_CARDS.hidden = false;
+
+    // add event listeners for reset button and Deck
+    setTimeout(() => {
+        RESET.addEventListener('click', resetGame);
+        DECK_OF_CARDS.addEventListener('click', main);
+    }, 1000);
+}
+
+
 function displayWinGameMsg() {
     // Remove event listeners for any Element which is not going to display in Win-Game-Message.
     setTimeout(() => {
@@ -297,7 +322,7 @@ function displayWinGameMsg() {
     WIN_MESSAGE.hidden = false;
 
     // add event listener to Play again button
-    // PLAY_AGAIN.addEventListener('click', resetGame);
+    PLAY_AGAIN.addEventListener('click', playAgain);
 }
 
 
