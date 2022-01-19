@@ -75,6 +75,8 @@ function createDeck() {
     for (let index = 0; index < 16; index++) {
         li = document.createElement('li');
         li.classList.add('card');
+        // make it keyboard focusable
+        li.tabIndex = 0;
         i = document.createElement('i');
         i.classList.add('fas'); // Add class for font awesome library 'fas' for solid & 'far' for regular icons
         console.log(cards[index]);
