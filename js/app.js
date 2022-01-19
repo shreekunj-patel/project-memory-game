@@ -290,3 +290,8 @@ function displayWinGameMsg() {
     // add event listener to Play again button
     // PLAY_AGAIN.addEventListener('click', resetGame);
 }
+
+
+function gameWon() {
+    return (matchedCardsCount === totalCards);
+}
