@@ -261,7 +261,7 @@ function createStarRating() {
 
 
 /**
- *  Restart | Reset | Play Again
+ *  Restart | Reset Game
  */
 function resetGame(evt) {
     totalMoves = 0; // reset total moves
@@ -303,4 +303,19 @@ function displayWinGameMsg() {
 
 function gameWon() {
     return (matchedCardsCount === totalCards);
+}
+
+
+/**
+ * hide or display elements in DOM
+ * @param {string} hideOrShow 'hide' or 'show'
+ * @param  {...any} element HTML Elements
+ */
+function hideOrShowContent(hideOrShow, ...element) {
+    const displayStyle = (hideOrShow.toLowerCase === 'hide') ? 'none' : '';
+    const hide = (displayStyle === 'none') ? true : false;
+    element.forEach((ele) => {
+        ele.style.display = displayStyle;
+        ele.hidden = hide;
+    });
 }
