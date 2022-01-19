@@ -51,7 +51,7 @@ checkForTotalCards();
 
 // change multiplication value to adjust star rating.
 // higher the value easier it is to acquire 5 stars.
-const MOVES_TO_DECREASE_STAR = Math.round(totalCardsForSinglePair * 2);
+const MOVES_TO_DECREASE_STAR = Math.round(totalCardsForSinglePair * 1.5);
 
 // ------------- Listeners --------------
 RESET.addEventListener('click', resetGame);
@@ -165,14 +165,16 @@ function main(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
         // only run code if card is neither open nor match
         if (!(evt.target.classList.contains('open') || evt.target.classList.contains('match'))) {
-            // Add a move.
-            totalMoves += 1;
-            MOVES.textContent = totalMoves;
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
-            let remainder = totalMoves % totalCardsForSinglePair;
-            if (remainder === 0) {
+            // list of all li which contains 'open' and 'show' class
+            let liList = DECK_OF_CARDS.querySelectorAll('.open.show');
+
+            if (liList.length === totalCardsForSinglePair) {
+                // Add a move.
+                totalMoves += 1;
+                MOVES.textContent = totalMoves;
                 console.log('opened ' + totalCardsForSinglePair + ' cards');
                 //before checking for matching cards remove event listener and then add it back.
                 setTimeout(() => {
@@ -181,8 +183,6 @@ function main(evt) {
                 }, 0);
                 // check for matching cards
                 setTimeout(() => {
-                    // list of all li which contains 'open' and 'show' class
-                    let liList = DECK_OF_CARDS.querySelectorAll('.open.show');
                     // check if pair found or not.
                     if (liList[0].firstElementChild.className === liList[1].firstElementChild.className) {
                         console.log('Congrats you found a pair');
@@ -195,7 +195,7 @@ function main(evt) {
                             // li.classList.remove('show');
                         });
                     } else {
-                        extraMoves += totalCardsForSinglePair;
+                        extraMoves += 1;
                         // Calculate Star rating
                         createStarRating();
                         console.log('closing cards cause it\'s not same');
