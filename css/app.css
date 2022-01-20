@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    --mx-width: 660px;
 }
 
 *,
@@ -80,13 +81,13 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    width: 660px;
+    width: var(--mx-width);
     min-height: 680px;
-    padding: 36px;
+    padding: 25px;
     background-color: darkslategray;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 36px;
+    margin: 0;
 }
 
 .deck .card {
@@ -157,11 +158,11 @@ h1 {
 @keyframes wrong-match {
     0% {
         background-color: mediumseagreen;
-        font-size: 48px;
+        font-size: 8vw;
     }
 
     90% {
-        font-size: 48px;
+        font-size: 8vw;
     }
 
     100% {
@@ -272,4 +273,30 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
         rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
         rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/*
+* Media Queries
+*/
+
+@media screen and (max-width:690px) {
+    .score-panel {
+        min-width: 92vmin;
+    }
+    .deck {
+        width: 95vw;
+        min-height: 103vw;
+        padding: 3.5%;
+    }
+    .deck .card {
+        width: 19vw;
+        height: 19vw;
+    }
+    .deck .card.show,
+    .deck .card.match {
+        font-size: 8vw;
+    }
+    .deck .card.wrong-match {
+        font-size: 0;
+    }
 }
