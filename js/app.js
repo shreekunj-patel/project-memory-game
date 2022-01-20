@@ -167,6 +167,7 @@ function main(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
         // only run code if card is neither open nor match
         if (!(evt.target.classList.contains('open') || evt.target.classList.contains('match'))) {
+            if (evt.target.classList.contains('wrong-match')) { evt.target.classList.remove('wrong-match'); }
             // Opens and shows card which is clicked
             evt.target.classList.add('open');
             evt.target.classList.add('show');
@@ -209,7 +210,7 @@ function main(evt) {
                         createStarRating();
                         console.log('closing cards cause it\'s not same');
                         liList.forEach((li) => {
-                            li.className = 'card'; // removes 'open' and 'show' class
+                            li.className = 'card wrong-match'; // removes 'open' and 'show' class
                             //li.classList.remove('open');
                             //li.classList.remove('show');
                         });
