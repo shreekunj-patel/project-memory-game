@@ -52,6 +52,7 @@ h1 {
     margin-bottom: 10px;
     text-align: left;
     min-width: 360px;
+    font-weight: 700;
 }
 
 .score-panel .stars {
